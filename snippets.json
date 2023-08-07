@@ -1,0 +1,95 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "title": "Copy",
+      "code": "<pre ref='tocopy'>{{ code }}</pre>",
+      "tags": ["javascript", "hello-world"],
+      "language": "javascript"
+    },
+    {
+      "id": 2,
+      "title": "Sum",
+      "code": "function add(a, b) {\n  return a + b;\n}",
+      "tags": ["javascript", "math", "addition"],
+      "language": "javascript"
+    },
+    {
+      "id": 3,
+      "title": "React",
+      "code": "import React from 'react';\n\nclass MyComponent extends React.Component {\n  render() {\n    return <div>Hello, World!</div>;\n  }\n}",
+      "tags": ["react", "jsx", "component"],
+      "language": "jsx"
+    },
+    {
+      "id": 4,
+      "title": "Fibonacci Series",
+      "code": "def fibonacci(n):\n  if n <= 0:\n    return []\n  elif n == 1:\n    return [0]\n  elif n == 2:\n    return [0, 1]\n  else:\n    fib = [0, 1]\n    while len(fib) < n:\n      fib.append(fib[-1] + fib[-2])\n    return fib",
+      "tags": ["python", "fibonacci", "math"],
+      "language": "python"
+    },
+    {
+      "id": 5,
+      "title": "Basic HTML Page",
+      "code": "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n  <p>This is a basic HTML page.</p>\n</body>\n</html>",
+      "tags": ["html", "web", "beginner"],
+      "language": "html"
+    },
+    {
+      "id": 6,
+      "title": "Button Styling",
+      "code": "button {\n  background-color: #007bff;\n  color: white;\n  padding: 10px 20px;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}",
+      "tags": ["css", "button", "styling"],
+      "language": "css"
+    },
+    {
+      "id": 7,
+      "title": "Check Prime Number",
+      "code": "function isPrime(number) {\n  if (number <= 1) return false;\n  for (let i = 2; i <= Math.sqrt(number); i++) {\n    if (number % i === 0) return false;\n  }\n  return true;\n}",
+      "tags": ["javascript", "math", "prime"],
+      "language": "javascript"
+    },
+    {
+      "id": 8,
+      "title": "Factorial",
+      "code": "public static int factorial(int n) {\n  if (n == 0 || n == 1) {\n    return 1;\n  } else {\n    return n * factorial(n - 1);\n  }\n}",
+      "tags": ["java", "math", "factorial"],
+      "language": "java"
+    },
+    {
+      "id": 9,
+      "title": "Interface Example",
+      "code": "interface Person {\n  name: string;\n  age: number;\n}\n\nconst person: Person = {\n  name: 'John Doe',\n  age: 30\n};",
+      "tags": ["typescript", "interface", "example"],
+      "language": "typescript"
+    },
+    {
+      "id": 10,
+      "title": "Select Query",
+      "code": "SELECT first_name, last_name, email FROM users WHERE age > 18;",
+      "tags": ["sql", "database", "query"],
+      "language": "sql"
+    },
+    {
+      "id": 11,
+      "title": "Bubble Sort",
+      "code": "void bubbleSort(int arr[], int n) {\n  for (int i = 0; i < n-1; i++) {\n    for (int j = 0; j < n-i-1; j++) {\n      if (arr[j] > arr[j+1]) {\n        swap(arr[j], arr[j+1]);\n      }\n    }\n  }\n}",
+      "tags": ["c++", "algorithm", "sorting"],
+      "language": "cpp"
+    },
+    {
+      "id": 12,
+      "title": "Vue Template",
+      "code": "<div class=\"app\">\n  <h1>{{ message }}</h1>\n  <button @click=\"increaseCount\">Increase Count</button>\n  <p>Count: {{ count }}</p>\n  <div class=\"todos\">\n    <h2>Todos</h2>\n    <ul>\n      <li v-for=\"todo in todos\" :key=\"todo.id\" @click=\"toggleTodoStatus(todo)\">\n        <span :class=\"{ completed: todo.completed }\">{{ todo.text }}</span>\n      </li>\n    </ul>\n  </div>\n</div>",
+      "tags": ["vue", "html", "javascript"],
+      "language": "html"
+    },
+    {
+      "id": 13,
+      "title": "Python Hello World",
+      "code": "print('Hello, World!')",
+      "tags": ["python", "hello-world", "print-statement"],
+      "language": "python"
+    }
+  ]
+}
