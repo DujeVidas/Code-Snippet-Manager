@@ -1,8 +1,10 @@
 <template>
   <ToolbarComp
+    :tags="tags"
     class="toolbar"
     @add-code="showDialog = true"
     @delete-all-snippets="deleteAllSnippets"
+    @filter-tags="filterTags"
   />
 
   <div class="text-white">
@@ -34,6 +36,7 @@
 import AddCode from 'src/components/AddCode.vue';
 import CardGrid from 'src/components/CardGrid.vue';
 import ToolbarComp from 'src/components/ToolbarComp.vue';
+
 import {
   saveSnippetToLocalStorage,
   getSnippetsFromLocalStorage,
@@ -46,10 +49,15 @@ const text = ref('');
 const showDialog = ref(false);
 const snippetsToShow = ref([]);
 const jsonData = ref([]);
+const tags = ref([]);
+const snippetsTagsFiltered = ref([]);
+const tagsToFilterToUse = ref([]);
 
 onMounted(async () => {
   jsonData.value = getSnippetsFromLocalStorage() || [];
   snippetsToShow.value = jsonData.value;
+  tags.value = getTags(jsonData.value);
+  snippetsTagsFiltered.value = jsonData.value;
 });
 
 const addSnippet = (snippet) => {
@@ -57,32 +65,43 @@ const addSnippet = (snippet) => {
   saveSnippetToLocalStorage(snippet);
   if (jsonData.value === null) {
     jsonData.value = snippet;
-    console.log('json:', jsonData.value, snippet);
   } else {
     jsonData.value.push(snippet);
-    console.log(typeof jsonData.value);
   }
-
-  console.log(jsonData.value);
   snippetsToShow.value = jsonData.value;
+  tags.value = getTags(jsonData.value);
+};
+
+const getTags = (snippets) => {
+  const allTagsSet = new Set();
+  for (const snippet of snippets) {
+    snippet.tags.forEach((tag) => allTagsSet.add(tag));
+  }
+  return Array.from(allTagsSet);
 };
 
 const searchSnippets = () => {
   if (text.value !== '') {
     const searchText = text.value.toLowerCase();
-    const filteredSnippets = jsonData.value.filter((snippet) =>
+    const filteredSnippets = snippetsTagsFiltered.value.filter((snippet) =>
       snippet.title.toLowerCase().includes(searchText)
     );
     snippetsToShow.value = filteredSnippets;
-    console.log(filteredSnippets);
-    return;
+  } else {
+    snippetsToShow.value = snippetsTagsFiltered.value;
   }
-  snippetsToShow.value = jsonData.value;
 };
 
 const resetText = () => {
   text.value = '';
-  snippetsToShow.value = jsonData.value;
+  if (tagsToFilterToUse.value.length !== 0) {
+    snippetsTagsFiltered.value = jsonData.value.filter((snippet) =>
+      snippet.tags.some((tag) => tagsToFilterToUse.value.includes(tag))
+    );
+    snippetsToShow.value = snippetsTagsFiltered.value;
+  } else {
+    searchSnippets();
+  }
 };
 
 const deleteAllSnippets = () => {
@@ -95,6 +114,19 @@ const deleteSnippet = (id) => {
   deleteSnippetFromLocalStorage(id);
   jsonData.value = getSnippetsFromLocalStorage() || [];
   snippetsToShow.value = jsonData.value;
+};
+
+const filterTags = (tagsToFilter) => {
+  tagsToFilterToUse.value = tagsToFilter;
+  if (tagsToFilter.length !== 0) {
+    snippetsTagsFiltered.value = jsonData.value.filter((snippet) =>
+      snippet.tags.some((tag) => tagsToFilter.includes(tag))
+    );
+    searchSnippets(); // Apply search filter to the filtered tags
+  } else {
+    snippetsTagsFiltered.value = jsonData.value;
+    searchSnippets(); // Apply search filter to all snippets
+  }
 };
 </script>
 

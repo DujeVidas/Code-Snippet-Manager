@@ -22,7 +22,6 @@ const props = defineProps({
 });
 
 const handleEmit = (id) => {
-  console.log(id);
   emit('delete-snippet', id);
 };
 </script>

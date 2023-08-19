@@ -19,6 +19,7 @@
         color="black"
         @click="$emit('deleteAllSnippets')"
       />
+      <TagMenu @send-tags="handleEmit" :tags="tags" />
       <q-btn flat round dense icon="help" color="black" />
       <q-btn
         flat
@@ -32,7 +33,16 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import TagMenu from './TagMenu.vue';
+const props = defineProps({
+  tags: Array,
+});
+const emit = defineEmits(['filter-tags']);
+const handleEmit = (tagsToFilter) => {
+  emit('filter-tags', tagsToFilter);
+};
+</script>
 
 <style lang="scss" scoped>
 .title {

@@ -97,8 +97,6 @@ function saveSnippet() {
     code: code.value,
   };
   emit('add', snippet);
-  console.log('Snippet:', snippet);
-
   resetForm();
 }
 
