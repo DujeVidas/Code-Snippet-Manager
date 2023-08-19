@@ -1,10 +1,12 @@
 <template>
   <ToolbarComp
     :tags="tags"
+    :languages="languages"
     class="toolbar"
     @add-code="showDialog = true"
     @delete-all-snippets="deleteAllSnippets"
     @filter-tags="filterTags"
+    @filter-languages="filterLanguages"
   />
 
   <div class="text-white">
@@ -50,83 +52,97 @@ const showDialog = ref(false);
 const snippetsToShow = ref([]);
 const jsonData = ref([]);
 const tags = ref([]);
+const languages = ref([]);
 const snippetsTagsFiltered = ref([]);
+const languagesToFilterToUse = ref([]);
 const tagsToFilterToUse = ref([]);
 
 onMounted(async () => {
   jsonData.value = getSnippetsFromLocalStorage() || [];
   snippetsToShow.value = jsonData.value;
   tags.value = getTags(jsonData.value);
+  languages.value = getLanguages(jsonData.value);
   snippetsTagsFiltered.value = jsonData.value;
 });
 
 const addSnippet = (snippet) => {
   snippet.language = snippet.language.value;
   saveSnippetToLocalStorage(snippet);
-  if (jsonData.value === null) {
-    jsonData.value = snippet;
-  } else {
-    jsonData.value.push(snippet);
-  }
-  snippetsToShow.value = jsonData.value;
-  tags.value = getTags(jsonData.value);
+  jsonData.value.push(snippet);
+  updateFilters();
 };
 
 const getTags = (snippets) => {
   const allTagsSet = new Set();
-  for (const snippet of snippets) {
+  snippets.forEach((snippet) => {
     snippet.tags.forEach((tag) => allTagsSet.add(tag));
-  }
+  });
   return Array.from(allTagsSet);
 };
 
+const getLanguages = (snippets) => {
+  const allLangSet = new Set();
+  snippets.forEach((snippet) => {
+    allLangSet.add(snippet.language);
+  });
+  return Array.from(allLangSet);
+};
+
+const updateFilters = () => {
+  tags.value = getTags(jsonData.value);
+  languages.value = getLanguages(jsonData.value);
+};
+
 const searchSnippets = () => {
-  if (text.value !== '') {
-    const searchText = text.value.toLowerCase();
-    const filteredSnippets = snippetsTagsFiltered.value.filter((snippet) =>
-      snippet.title.toLowerCase().includes(searchText)
-    );
-    snippetsToShow.value = filteredSnippets;
-  } else {
-    snippetsToShow.value = snippetsTagsFiltered.value;
-  }
+  const searchText = text.value.toLowerCase();
+  snippetsToShow.value = snippetsTagsFiltered.value.filter(
+    (snippet) =>
+      snippet.title.toLowerCase().includes(searchText) &&
+      (tagsToFilterToUse.value.length === 0 ||
+        snippet.tags.some((tag) => tagsToFilterToUse.value.includes(tag))) &&
+      (languagesToFilterToUse.value.length === 0 ||
+        languagesToFilterToUse.value.includes(snippet.language))
+  );
 };
 
 const resetText = () => {
   text.value = '';
-  if (tagsToFilterToUse.value.length !== 0) {
-    snippetsTagsFiltered.value = jsonData.value.filter((snippet) =>
-      snippet.tags.some((tag) => tagsToFilterToUse.value.includes(tag))
-    );
-    snippetsToShow.value = snippetsTagsFiltered.value;
-  } else {
-    searchSnippets();
-  }
+  updateFilters();
+  searchSnippets();
 };
 
 const deleteAllSnippets = () => {
   deleteAllSnippetsFromLocalStorage();
   jsonData.value = getSnippetsFromLocalStorage() || [];
   snippetsToShow.value = jsonData.value;
+  snippetsTagsFiltered.value = [];
+  tagsToFilterToUse.value = [];
+  languagesToFilterToUse.value = [];
+  updateFilters();
 };
 
 const deleteSnippet = (id) => {
   deleteSnippetFromLocalStorage(id);
   jsonData.value = getSnippetsFromLocalStorage() || [];
   snippetsToShow.value = jsonData.value;
+  removeSnippetFrontend(id);
+  updateFilters();
+};
+
+const removeSnippetFrontend = (id) => {
+  snippetsTagsFiltered.value = snippetsTagsFiltered.value.filter(
+    (snippet) => snippet.id !== id
+  );
 };
 
 const filterTags = (tagsToFilter) => {
   tagsToFilterToUse.value = tagsToFilter;
-  if (tagsToFilter.length !== 0) {
-    snippetsTagsFiltered.value = jsonData.value.filter((snippet) =>
-      snippet.tags.some((tag) => tagsToFilter.includes(tag))
-    );
-    searchSnippets(); // Apply search filter to the filtered tags
-  } else {
-    snippetsTagsFiltered.value = jsonData.value;
-    searchSnippets(); // Apply search filter to all snippets
-  }
+  searchSnippets();
+};
+
+const filterLanguages = (languagesToFilter) => {
+  languagesToFilterToUse.value = languagesToFilter;
+  searchSnippets();
 };
 </script>
 

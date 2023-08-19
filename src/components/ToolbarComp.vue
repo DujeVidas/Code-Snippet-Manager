@@ -19,7 +19,8 @@
         color="black"
         @click="$emit('deleteAllSnippets')"
       />
-      <TagMenu @send-tags="handleEmit" :tags="tags" />
+      <TagMenu @send-tags="handleTagEmit" :tags="tags" />
+      <LanguageMenu @send-languages="handleLangEmit" :languages="languages" />
       <q-btn flat round dense icon="help" color="black" />
       <q-btn
         flat
@@ -35,12 +36,18 @@
 
 <script setup>
 import TagMenu from './TagMenu.vue';
+import LanguageMenu from './LanguageMenu.vue';
 const props = defineProps({
   tags: Array,
+  languages: Array,
 });
-const emit = defineEmits(['filter-tags']);
-const handleEmit = (tagsToFilter) => {
+const emit = defineEmits(['filter-tags', 'filter-languages']);
+const handleTagEmit = (tagsToFilter) => {
   emit('filter-tags', tagsToFilter);
+};
+
+const handleLangEmit = (languagesToFilter) => {
+  emit('filter-languages', languagesToFilter);
 };
 </script>
 

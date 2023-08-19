@@ -2,11 +2,10 @@
   <q-btn flat round dense icon="sell" color="black">
     <q-menu :offset="[30, 10]" class="bg-black text-white rounded-borders">
       <q-list v-for="tag in tags" :key="tag" style="min-width: 100px">
-        <q-item clickable>
+        <q-item clickable @click="handleTag(tag)">
           <q-item-section
             class="item"
             :class="{ selected_item: tagsToFilter.includes(tag) }"
-            @click="handleTag(tag)"
             >{{ tag }}</q-item-section
           >
         </q-item>
