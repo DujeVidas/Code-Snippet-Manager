@@ -11,6 +11,7 @@
         </q-item>
       </q-list>
     </q-menu>
+    <q-tooltip>Filter By Tags</q-tooltip>
   </q-btn>
 </template>
 

@@ -17,8 +17,29 @@
         dense
         icon="delete_forever"
         color="black"
-        @click="$emit('deleteAllSnippets')"
-      />
+        @click="alert = true"
+        ><q-tooltip>Delete All Snippets</q-tooltip></q-btn
+      >
+      <q-dialog v-model="alert">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6">Alert</div>
+          </q-card-section>
+          <q-card-section class="q-pt-none">
+            Do you Want to Delete All Snippets
+          </q-card-section>
+          <q-card-actions align="right">
+            <q-btn
+              flat
+              label="YES"
+              color="black"
+              @click="$emit('deleteAllSnippets')"
+              v-close-popup
+            />
+            <q-btn flat label="NO" color="black" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
       <TagMenu @send-tags="handleTagEmit" :tags="tags" />
       <LanguageMenu @send-languages="handleLangEmit" :languages="languages" />
       <q-btn
@@ -28,14 +49,17 @@
         icon="add_circle"
         color="black"
         @click="$emit('addCode')"
-      />
+        ><q-tooltip>Add Snippet</q-tooltip></q-btn
+      >
     </q-toolbar>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import TagMenu from './TagMenu.vue';
 import LanguageMenu from './LanguageMenu.vue';
+const alert = ref(false);
 const props = defineProps({
   tags: Array,
   languages: Array,

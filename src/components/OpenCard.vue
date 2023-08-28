@@ -12,13 +12,31 @@
               name="delete"
               color="red"
               size="md"
-              @click="handleEmit"
+              @click="alert = true"
               style="cursor: pointer"
-              v-close-popup
             />
           </q-item-section>
         </q-item>
-
+        <q-dialog v-model="alert">
+          <q-card>
+            <q-card-section>
+              <div class="text-h6">Alert</div>
+            </q-card-section>
+            <q-card-section class="q-pt-none">
+              Do you Want To Delete This Snippets
+            </q-card-section>
+            <q-card-actions align="right">
+              <q-btn
+                flat
+                label="YES"
+                color="black"
+                @click="handleEmit"
+                v-close-popup
+              />
+              <q-btn flat label="NO" color="black" v-close-popup />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
         <div class="tags-container">
           <div class="text-subtitle2" v-for="tag in tags" :key="tag">
             <p>{{ tag }}</p>
@@ -50,7 +68,9 @@ import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-docker';
 import { useQuasar } from 'quasar';
+import { ref } from 'vue';
 const emit = defineEmits('delete-snippet');
+const alert = ref(false);
 const props = defineProps({
   title: String,
   code: String,

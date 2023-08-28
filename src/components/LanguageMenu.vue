@@ -15,6 +15,7 @@
         </q-item>
       </q-list>
     </q-menu>
+    <q-tooltip>Filter By Language</q-tooltip>
   </q-btn>
 </template>
 
