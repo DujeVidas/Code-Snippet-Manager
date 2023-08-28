@@ -21,7 +21,6 @@
       />
       <TagMenu @send-tags="handleTagEmit" :tags="tags" />
       <LanguageMenu @send-languages="handleLangEmit" :languages="languages" />
-      <q-btn flat round dense icon="help" color="black" />
       <q-btn
         flat
         round
