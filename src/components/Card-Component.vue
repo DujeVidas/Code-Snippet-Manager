@@ -93,6 +93,7 @@ onMounted(() => {
 }
 .my-card:hover {
   transform: translateY(-10px);
+  box-shadow: 5px 14px 3px rgba(0, 0, 0, 0.2);
 }
 .tags-container {
   display: flex;

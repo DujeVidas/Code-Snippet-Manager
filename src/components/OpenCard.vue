@@ -23,7 +23,7 @@
               <div class="text-h6">Alert</div>
             </q-card-section>
             <q-card-section class="q-pt-none">
-              Do you Want To Delete This Snippets
+              Do you Want To Delete This Snippet
             </q-card-section>
             <q-card-actions align="right">
               <q-btn
