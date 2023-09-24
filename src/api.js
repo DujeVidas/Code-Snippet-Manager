@@ -7,7 +7,6 @@ export function saveSnippetToLocalStorage(snippet) {
     getSnippetsFromLocalStorage();
   } catch (error) {
     console.error('Error saving snippet:', error);
-    // Handle failure, show an error message, etc.
   }
 }
 
@@ -15,11 +14,9 @@ export function getSnippetsFromLocalStorage() {
   try {
     const snippets = JSON.parse(localStorage.getItem('snippets'));
     console.log('Snippets:', snippets);
-    // Handle the snippets, e.g., display them in your Vue component
     return snippets;
   } catch (error) {
     console.error('Error getting snippets:', error);
-    // Handle error, show an error message, etc.
     return null;
   }
 }
@@ -36,9 +33,7 @@ export function deleteSnippetFromLocalStorage(id) {
     );
     localStorage.setItem('snippets', JSON.stringify(updatedSnippets));
     console.log('Snippet deleted successfully!');
-    // Handle success, for example, update the UI to reflect the deleted snippet
   } catch (error) {
     console.error('Error deleting snippet:', error);
-    // Handle failure, show an error message, etc.
   }
 }
