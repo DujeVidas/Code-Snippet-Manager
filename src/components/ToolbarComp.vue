@@ -11,6 +11,7 @@
         :ripple="false"
       />
       <q-toolbar-title class="title"> Code Snippet Manager </q-toolbar-title>
+      <q-btn flat @click="logout">Logout</q-btn>
       <q-btn
         flat
         round
@@ -59,6 +60,16 @@
 import { ref } from 'vue';
 import TagMenu from './TagMenu.vue';
 import LanguageMenu from './LanguageMenu.vue';
+import signout from 'src/firebase/firebase-signout';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const logout = () => {
+  signout().then(() => {
+    router.push('/login');
+  });
+};
 const alert = ref(false);
 const props = defineProps({
   tags: Array,
