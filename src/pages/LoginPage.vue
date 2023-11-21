@@ -1,86 +1,37 @@
 <template>
-  <!-- Design template by Joabson Arley
-     https://github.com/Joabsonlg/quasar-template-->
+  <q-card class="q-pa-md shadow-2 my_card" bordered>
+    <q-card-section class="text-center">
+      <div class="text-grey-9 text-h5 text-weight-bold">Sign in</div>
+      <div class="text-grey-8">Sign in below to access your account</div>
+    </q-card-section>
+    <q-card-section>
+      <q-form ref="form" class="q-gutter-md" @submit="submit">
+        <q-input v-model="user.email" label="Email" name="Email" />
 
-  <q-card class="q-ma-xl">
-    <div class="row">
-      <div class="col-0 col-sm-5 bg-primary rounded-left-borders xs-hide">
-        <div
-          class="row full-width q-px-xl q-pb-xl full-height flex flex-center"
-        >
-          <div class="">
-            <div
-              class="text-h4 text-uppercase text-white fredoka"
-              style="min-width: 220px"
-            >
-              Welcome!
-            </div>
-            <div class="text-white q-my-sm text-subtitle1">
-              Please sign in to your account to get started!
-            </div>
-          </div>
+        <q-input
+          v-model="user.password"
+          label="Password"
+          name="password"
+          type="password"
+        />
+
+        <div>
+          <q-btn
+            class="full-width fredoka"
+            color="dark"
+            label="Login"
+            rounded
+            type="submit"
+          ></q-btn>
         </div>
+      </q-form>
+    </q-card-section>
+    <q-card-section class="text-center q-pt-none">
+      <div class="text-grey-8">
+        Don't have an account yet?
+        <router-link class="text-primary" to="/register">Register</router-link>
       </div>
-
-      <div class="col-12 col-sm-7">
-        <div class="row q-ml-sm q-mt-sm sm-and-up-hide">
-          <div class="col-12 fredoka text-subtitle1">
-            <router-link
-              class="text-primary"
-              style="text-decoration: none"
-              to="/"
-            >
-              System Name
-            </router-link>
-          </div>
-        </div>
-        <div class="row q-pa-sm-sm q-pa-md">
-          <div class="col-12">
-            <q-card-section>
-              <div class="q-mb-xl">
-                <div class="flex justify-center">
-                  <div
-                    class="text-h4 text-uppercase q-my-none text-weight-bold text-primary fredoka"
-                  >
-                    Login
-                  </div>
-                </div>
-              </div>
-
-              <q-form ref="form" class="q-gutter-md" @submit="submit">
-                <q-input v-model="user.email" label="Email" name="Email" />
-
-                <q-input
-                  v-model="user.password"
-                  label="Password"
-                  name="password"
-                  type="password"
-                />
-
-                <div>
-                  <q-btn
-                    class="full-width fredoka"
-                    color="primary"
-                    label="Login"
-                    rounded
-                    type="submit"
-                  ></q-btn>
-
-                  <div class="q-mt-lg">
-                    <div class="q-mt-sm">
-                      Don't have an account yet?
-                      <router-link class="text-primary" to="/register"
-                        >Register</router-link
-                      >
-                    </div>
-                  </div>
-                </div>
-              </q-form>
-            </q-card-section>
-          </div>
-        </div>
-      </div>
-    </div>
+    </q-card-section>
   </q-card>
 </template>
 
@@ -107,3 +58,12 @@ const submit = async () => {
   }
 };
 </script>
+
+<style scoped>
+.my_card {
+  width: 25rem;
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+</style>

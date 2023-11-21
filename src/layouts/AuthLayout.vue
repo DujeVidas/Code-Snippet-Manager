@@ -26,10 +26,10 @@
 }
 
 .bg-auth {
-  background-color: #f0f4f3;
-  background-image: url('src/assets/bg-auth.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: linear-gradient(
+    315deg,
+    rgba(0, 0, 0, 1) 45%,
+    rgb(70, 1, 107) 100%
+  );
 }
 </style>

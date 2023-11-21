@@ -1,95 +1,36 @@
 <template>
-  <!-- Template by Joabson Arley
-     https://github.com/Joabsonlg/quasar-template -->
+  <q-card class="q-pa-md shadow-2 my_card" bordered>
+    <q-card-section class="text-center">
+      <div class="text-grey-9 text-h5 text-weight-bold">Sign in</div>
+      <div class="text-grey-8">Registration Form</div>
+    </q-card-section>
+    <q-form ref="form" class="q-gutter-md" @submit="submit">
+      <q-input v-model="user.first_name" label="First Name" name="First Name" />
+      <q-input v-model="user.last_name" label="Last Name" name="Last Name" />
+      <q-input v-model="user.email" label="Email" name="Email" />
+      <q-input
+        v-model="user.password"
+        label="Password"
+        name="password"
+        type="password"
+      />
 
-  <q-card class="q-ma-xl">
-    <div class="row">
-      <div class="col-0 col-sm-5 bg-primary rounded-left-borders xs-hide">
-        <div
-          class="row full-width q-px-xl q-pb-xl full-height flex flex-center"
-        >
-          <div class="">
-            <div
-              class="text-h4 text-uppercase text-white fredoka"
-              style="min-width: 220px"
-            >
-              Welcome!
-            </div>
-            <div class="text-white q-my-sm text-subtitle1">
-              Enter your details to get started!
-            </div>
-          </div>
-        </div>
+      <div>
+        <q-btn
+          class="full-width fredoka"
+          color="dark"
+          label="Register"
+          rounded
+          type="submit"
+        ></q-btn>
       </div>
-
-      <div class="col-12 col-sm-7">
-        <div class="row q-ml-sm q-mt-sm sm-and-up-hide">
-          <div class="col-12 fredoka text-subtitle1">
-            <router-link
-              class="text-primary"
-              style="text-decoration: none"
-              to="/"
-            >
-              System Name
-            </router-link>
-          </div>
-        </div>
-        <div class="row q-pa-sm-sm q-pa-md">
-          <div class="col-12">
-            <q-card-section>
-              <div class="q-mb-xl">
-                <div class="flex justify-center">
-                  <div
-                    class="text-h4 text-uppercase q-my-none text-weight-bold text-primary fredoka"
-                  >
-                    Registration Form
-                  </div>
-                </div>
-              </div>
-
-              <q-form ref="form" class="q-gutter-md" @submit="submit">
-                <q-input
-                  v-model="user.first_name"
-                  label="First Name"
-                  name="First Name"
-                />
-                <q-input
-                  v-model="user.last_name"
-                  label="Last Name"
-                  name="Last Name"
-                />
-                <q-input v-model="user.email" label="Email" name="Email" />
-                <q-input
-                  v-model="user.password"
-                  label="Password"
-                  name="password"
-                  type="password"
-                />
-
-                <div>
-                  <q-btn
-                    class="full-width fredoka"
-                    color="primary"
-                    label="Register"
-                    rounded
-                    type="submit"
-                  ></q-btn>
-
-                  <div class="q-mt-lg">
-                    <div class="q-mt-sm">
-                      Already have an account?
-                      <router-link class="text-primary" to="/login"
-                        >Login</router-link
-                      >
-                    </div>
-                  </div>
-                </div>
-              </q-form>
-            </q-card-section>
-          </div>
-        </div>
+    </q-form>
+    <q-card-section class="text-center q-pt-none">
+      <div class="text-grey-8">
+        Already have an account?
+        <router-link class="text-primary" to="/login">Login</router-link>
       </div>
-    </div>
+    </q-card-section>
   </q-card>
 </template>
 
@@ -115,3 +56,12 @@ const submit = async () => {
   }
 };
 </script>
+
+<style scoped>
+.my_card {
+  width: 25rem;
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+</style>

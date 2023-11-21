@@ -38,12 +38,14 @@
 import AddCode from 'src/components/AddCode.vue';
 import CardGrid from 'src/components/CardGrid.vue';
 import ToolbarComp from 'src/components/ToolbarComp.vue';
-
+import { auth } from 'src/firebase/index';
+import { onAuthStateChanged } from 'firebase/auth';
+import { Loading } from 'quasar';
 import {
-  saveSnippetToLocalStorage,
-  getSnippetsFromLocalStorage,
-  deleteAllSnippetsFromLocalStorage,
-  deleteSnippetFromLocalStorage,
+  saveSnippetFirebase,
+  getSnippetsFirebase,
+  deleteAllSnippetsFirebase,
+  deleteSnippetFirebase,
 } from '../api';
 import { ref, onMounted } from 'vue';
 
@@ -56,18 +58,36 @@ const languages = ref([]);
 const snippetsTagsFiltered = ref([]);
 const languagesToFilterToUse = ref([]);
 const tagsToFilterToUse = ref([]);
+const userId = ref({});
+const userEmail = ref({});
+const userName = ref({});
 
 onMounted(async () => {
-  jsonData.value = getSnippetsFromLocalStorage() || [];
-  snippetsToShow.value = jsonData.value;
-  tags.value = getTags(jsonData.value);
-  languages.value = getLanguages(jsonData.value);
-  snippetsTagsFiltered.value = jsonData.value;
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      userId.value = user.uid;
+      userEmail.value = user.email;
+      userName.value = user.displayName;
+
+      Loading.show();
+      jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
+      Loading.hide();
+
+      console.log(typeof jsonData.value);
+      console.log(jsonData.value);
+      snippetsToShow.value = jsonData.value;
+      tags.value = getTags(jsonData.value);
+      languages.value = getLanguages(jsonData.value);
+      snippetsTagsFiltered.value = jsonData.value;
+    } else {
+      console.log('No user is signed in');
+    }
+  });
 });
 
 const addSnippet = (snippet) => {
   snippet.language = snippet.language.value;
-  saveSnippetToLocalStorage(snippet);
+  saveSnippetFirebase(userId.value, snippet);
   jsonData.value.push(snippet);
   updateFilters();
 };
@@ -89,6 +109,7 @@ const getLanguages = (snippets) => {
 };
 
 const updateFilters = () => {
+  console.log(jsonData.value);
   tags.value = getTags(jsonData.value);
   languages.value = getLanguages(jsonData.value);
 };
@@ -111,9 +132,10 @@ const resetText = () => {
   searchSnippets();
 };
 
-const deleteAllSnippets = () => {
-  deleteAllSnippetsFromLocalStorage();
-  jsonData.value = getSnippetsFromLocalStorage() || [];
+const deleteAllSnippets = async () => {
+  await deleteAllSnippetsFirebase(userId.value);
+  jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
+  console.log(jsonData.value);
   snippetsToShow.value = jsonData.value;
   snippetsTagsFiltered.value = [];
   tagsToFilterToUse.value = [];
@@ -121,9 +143,10 @@ const deleteAllSnippets = () => {
   updateFilters();
 };
 
-const deleteSnippet = (id) => {
-  deleteSnippetFromLocalStorage(id);
-  jsonData.value = getSnippetsFromLocalStorage() || [];
+const deleteSnippet = async (id) => {
+  await deleteSnippetFirebase(userId.value, id);
+  jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
+  console.log('json: ', jsonData.value);
   snippetsToShow.value = jsonData.value;
   removeSnippetFrontend(id);
   updateFilters();
