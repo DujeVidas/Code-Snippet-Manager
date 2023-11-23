@@ -1,5 +1,5 @@
 <template>
-  <q-btn flat round dense icon="translate" color="black">
+  <q-btn flat round dense icon="translate" color="white">
     <q-menu :offset="[30, 10]" class="bg-black text-white rounded-borders">
       <q-list
         v-for="language in languages"

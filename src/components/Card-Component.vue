@@ -86,14 +86,14 @@ onMounted(() => {
   background: rgb(0, 0, 0);
   background: linear-gradient(
     45deg,
-    rgba(0, 0, 0, 1) 76%,
-    rgba(175, 154, 186, 1) 100%
+    rgba(0, 0, 0, 1) 40%,
+    rgb(73, 2, 111) 100%
   );
   box-shadow: 5px 4px 3px rgba(0, 0, 0, 0.2);
 }
 .my-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 5px 14px 3px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px) translateX(-5px);
+  box-shadow: 10px 9px 3px rgba(0, 0, 0, 0.2);
 }
 .tags-container {
   display: flex;

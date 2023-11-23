@@ -1,6 +1,6 @@
 <template>
-  <q-btn flat round dense icon="sell" color="black">
-    <q-menu :offset="[30, 10]" class="bg-black text-white rounded-borders">
+  <q-btn flat round dense icon="sell" color="white">
+    <q-menu :offset="[30, 10]" class="bg-grey-10 text-white rounded-borders">
       <q-list v-for="tag in tags" :key="tag" style="min-width: 100px">
         <q-item clickable @click="handleTag(tag)">
           <q-item-section

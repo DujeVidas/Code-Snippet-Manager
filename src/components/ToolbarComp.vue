@@ -5,7 +5,7 @@
         flat
         round
         dense
-        color="black"
+        color="white"
         icon="code"
         style="cursor: default"
         :ripple="false"
@@ -17,7 +17,7 @@
         round
         dense
         icon="delete_forever"
-        color="black"
+        color="white"
         @click="alert = true"
         ><q-tooltip>Delete All Snippets</q-tooltip></q-btn
       >
@@ -48,7 +48,7 @@
         round
         dense
         icon="add_circle"
-        color="black"
+        color="white"
         @click="$emit('addCode')"
         ><q-tooltip>Add Snippet</q-tooltip></q-btn
       >

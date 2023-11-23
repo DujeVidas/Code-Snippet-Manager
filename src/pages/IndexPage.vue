@@ -9,7 +9,7 @@
     @filter-languages="filterLanguages"
   />
 
-  <div class="text-white">
+  <div class="text-white bg-dark">
     <q-input
       bg-color="white"
       rounded
@@ -171,7 +171,7 @@ const filterLanguages = (languagesToFilter) => {
 
 <style lang="scss">
 body {
-  background-color: whitesmoke;
+  background-color: #1d1d1d;
 }
 .custom-input {
   width: 400px;
@@ -179,10 +179,10 @@ body {
   padding-top: 20px;
 }
 .toolbar {
-  background-color: white;
-  color: black;
+  background-color: #212121;
+  color: rgb(255, 255, 255);
   height: 70px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.201);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   display: flex;
