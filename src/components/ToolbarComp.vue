@@ -134,6 +134,7 @@ const handleLangEmit = (languagesToFilter) => {
   font-size: x-large;
   font-weight: bold;
   font-family: 'RubixSmall', Times, serif;
+  cursor: default;
 }
 
 .q-menu {
@@ -188,6 +189,6 @@ const handleLangEmit = (languagesToFilter) => {
 }
 
 .avatar {
-  cursor: default;
+  cursor: pointer;
 }
 </style>
