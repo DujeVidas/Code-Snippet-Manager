@@ -7,11 +7,13 @@
     @delete-all-snippets="deleteAllSnippets"
     @filter-tags="filterTags"
     @filter-languages="filterLanguages"
+    @toggle-menu="toggleMenu"
+    @close-menu="closeMenu"
     :userName="userName"
     :userEmail="userEmail"
+    :showMenu="showMenu"
   />
-
-  <div class="text-white bg-dark">
+  <div class="text-white bg-dark fill-div" @click="closeMenu">
     <q-input
       bg-color="white"
       rounded
@@ -48,12 +50,12 @@ import {
   deleteAllSnippetsFirebase,
   deleteSnippetFirebase,
 } from '../api';
-import { ref, onMounted, defineAsyncComponent } from 'vue';
+import { ref, onMounted, onBeforeUnmount, defineAsyncComponent } from 'vue';
 
 const ToolbarComp = defineAsyncComponent(() =>
   import('src/components/ToolbarComp.vue')
 );
-
+const showMenu = ref(false);
 const text = ref('');
 const showDialog = ref(false);
 const snippetsToShow = ref([]);
@@ -67,6 +69,14 @@ const userId = ref({});
 const userEmail = ref({});
 const userName = ref({});
 const isComponentReady = ref(false);
+
+const closeMenu = () => {
+  showMenu.value = false;
+};
+
+const toggleMenu = () => {
+  showMenu.value = !showMenu.value;
+};
 
 onMounted(async () => {
   onAuthStateChanged(auth, async (user) => {
@@ -86,10 +96,24 @@ onMounted(async () => {
       tags.value = getTags(jsonData.value);
       languages.value = getLanguages(jsonData.value);
       snippetsTagsFiltered.value = jsonData.value;
+      document.body.addEventListener('click', handleBodyClick);
     } else {
       console.log('No user is signed in');
     }
   });
+});
+
+const handleBodyClick = (event) => {
+  const qAppElement = document.getElementById('q-app');
+  const isInsideQApp = qAppElement.contains(event.target);
+
+  if (!isInsideQApp) {
+    closeMenu();
+  }
+};
+
+onBeforeUnmount(() => {
+  document.body.removeEventListener('click', handleBodyClick);
 });
 
 const addSnippet = (snippet) => {
@@ -177,6 +201,13 @@ const filterLanguages = (languagesToFilter) => {
 </script>
 
 <style lang="scss">
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* This may need to be adjusted based on your layout needs */
+}
 body {
   background-color: #1d1d1d;
 }
@@ -185,5 +216,15 @@ body {
   margin: 0 auto;
   padding-top: 20px;
   font-family: 'Rubix';
+}
+
+.full-height {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.fill-div {
+  flex: 1;
 }
 </style>

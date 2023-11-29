@@ -1,5 +1,10 @@
 <template>
-  <q-dialog @before-hide="resetForm">
+  <q-dialog
+    @before-hide="resetForm"
+    transition-show="slide-down"
+    transition-hide="slide-up"
+    transition-duration="500"
+  >
     <div class="q-pa-md">
       <q-card class="snippet-form">
         <q-card-section>
