@@ -1,6 +1,6 @@
 <template>
   <q-dialog transition-show="rotate" transition-hide="rotate">
-    <q-card style="width: 700px; height: 500px">
+    <q-card style="width: 700px; height: 500px" class="card">
       <q-card-section>
         <q-item>
           <q-item-section>
@@ -112,5 +112,8 @@ const handleEmit = () => {
 
 .q-item-section--side {
   justify-content: flex-end;
+}
+.card {
+  font-family: 'Rubix';
 }
 </style>

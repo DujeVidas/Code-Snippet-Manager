@@ -41,6 +41,7 @@ const handleTag = (tag) => {
 .item {
   border-radius: 5px;
   align-items: center;
+  font-family: 'RubixSmall';
 }
 .selected_item {
   background-color: green;

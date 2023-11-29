@@ -1,12 +1,14 @@
 <template>
   <ToolbarComp
+    v-if="isComponentReady"
     :tags="tags"
     :languages="languages"
-    class="toolbar"
     @add-code="showDialog = true"
     @delete-all-snippets="deleteAllSnippets"
     @filter-tags="filterTags"
     @filter-languages="filterLanguages"
+    :userName="userName"
+    :userEmail="userEmail"
   />
 
   <div class="text-white bg-dark">
@@ -37,7 +39,6 @@
 <script setup>
 import AddCode from 'src/components/AddCode.vue';
 import CardGrid from 'src/components/CardGrid.vue';
-import ToolbarComp from 'src/components/ToolbarComp.vue';
 import { auth } from 'src/firebase/index';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Loading } from 'quasar';
@@ -47,7 +48,11 @@ import {
   deleteAllSnippetsFirebase,
   deleteSnippetFirebase,
 } from '../api';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineAsyncComponent } from 'vue';
+
+const ToolbarComp = defineAsyncComponent(() =>
+  import('src/components/ToolbarComp.vue')
+);
 
 const text = ref('');
 const showDialog = ref(false);
@@ -61,6 +66,7 @@ const tagsToFilterToUse = ref([]);
 const userId = ref({});
 const userEmail = ref({});
 const userName = ref({});
+const isComponentReady = ref(false);
 
 onMounted(async () => {
   onAuthStateChanged(auth, async (user) => {
@@ -68,6 +74,7 @@ onMounted(async () => {
       userId.value = user.uid;
       userEmail.value = user.email;
       userName.value = user.displayName;
+      isComponentReady.value = true;
 
       Loading.show();
       jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
@@ -177,15 +184,6 @@ body {
   width: 400px;
   margin: 0 auto;
   padding-top: 20px;
-}
-.toolbar {
-  background-color: #212121;
-  color: rgb(255, 255, 255);
-  height: 70px;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.201);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  display: flex;
-  font-weight: bold;
+  font-family: 'Rubix';
 }
 </style>

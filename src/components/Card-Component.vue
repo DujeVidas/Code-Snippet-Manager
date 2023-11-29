@@ -90,6 +90,7 @@ onMounted(() => {
     rgb(73, 2, 111) 100%
   );
   box-shadow: 5px 4px 3px rgba(0, 0, 0, 0.2);
+  font-family: 'Rubix';
 }
 .my-card:hover {
   transform: translateY(-5px) translateX(-5px);
@@ -109,7 +110,7 @@ onMounted(() => {
   background-color: rgba(0, 0, 0, 0.5);
 }
 .title {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Rubix';
 }
 .tags {
   font-family: 'Fantasy';

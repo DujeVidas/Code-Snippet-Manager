@@ -1,6 +1,6 @@
 <template>
   <q-btn flat round dense icon="translate" color="white">
-    <q-menu :offset="[30, 10]" class="bg-black text-white rounded-borders">
+    <q-menu :offset="[30, 10]" class="bg-grey-10 text-white rounded-borders">
       <q-list
         v-for="language in languages"
         :key="language"
@@ -45,6 +45,7 @@ const handleLanguage = (language) => {
 .item {
   border-radius: 5px;
   align-items: center;
+  font-family: 'RubixSmall';
 }
 .selected_item {
   background-color: green;
