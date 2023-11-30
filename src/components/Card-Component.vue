@@ -13,8 +13,10 @@
       <q-separator />
 
       <q-card-actions align="around">
-        <q-btn flat @click="copyCode">Copy</q-btn>
-        <q-btn flat @click="showDialog = true">Open</q-btn>
+        <q-btn flat dense @click="copyCode" class="full-width-btn">Copy</q-btn>
+        <q-btn flat dense @click="showDialog = true" class="full-width-btn"
+          >Open</q-btn
+        >
       </q-card-actions>
     </q-card>
 
@@ -82,37 +84,48 @@ onMounted(() => {
 .my-card {
   width: 250px;
   height: 150px;
-  background: rgb(0, 0, 0);
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    45deg,
-    rgba(0, 0, 0, 1) 40%,
-    rgb(73, 2, 111) 100%
-  );
-  box-shadow: 5px 4px 3px rgba(0, 0, 0, 0.2);
-  font-family: 'Rubix';
+  background: linear-gradient(45deg, #333333, #000000);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Rubik', sans-serif;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
+
+.full-width-btn {
+  width: 45%;
+}
+
 .my-card:hover {
-  transform: translateY(-5px) translateX(-5px);
-  box-shadow: 10px 9px 3px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
 }
+
 .tags-container {
   display: flex;
   justify-content: space-evenly;
+  cursor: default;
 }
 
-.dialog-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
 .title {
-  font-family: 'Rubix';
+  font-family: 'Rubik', sans-serif;
+  color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 8px;
 }
+
 .tags {
-  font-family: 'Fantasy';
+  font-family: 'Fantasy', sans-serif;
+  color: #b3b3b3;
+  margin-right: 8px;
+}
+
+.q-card-actions button {
+  color: #b3b3b3;
+  transition: color 0.3s;
+}
+
+.q-card-actions button:hover {
+  color: #ffffff;
 }
 </style>

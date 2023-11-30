@@ -1,8 +1,8 @@
 <template>
   <q-card class="q-pa-md shadow-2 my_card" bordered>
     <q-card-section class="text-center">
-      <div class="text-grey-9 text-h5 text-weight-bold">Sign in</div>
-      <div class="text-grey-8">Sign in below to access your account</div>
+      <div class="text-grey-9 text-h5 text-weight-bold">Log in</div>
+      <div class="text-grey-8">Log in below to access your account</div>
     </q-card-section>
     <q-card-section>
       <q-form ref="form" class="q-gutter-md" @submit="submit">

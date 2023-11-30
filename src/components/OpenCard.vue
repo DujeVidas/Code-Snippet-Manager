@@ -1,5 +1,9 @@
 <template>
-  <q-dialog transition-show="rotate" transition-hide="rotate">
+  <q-dialog
+    transition-show="slide-right"
+    transition-duration="300"
+    transition-hide="slide-right"
+  >
     <q-card style="width: 700px; height: 500px" class="card">
       <q-card-section>
         <q-item>

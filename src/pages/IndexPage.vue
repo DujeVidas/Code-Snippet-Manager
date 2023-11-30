@@ -164,6 +164,7 @@ const resetText = () => {
 };
 
 const deleteAllSnippets = async () => {
+  Loading.show();
   await deleteAllSnippetsFirebase(userId.value);
   jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
   console.log(jsonData.value);
@@ -172,15 +173,18 @@ const deleteAllSnippets = async () => {
   tagsToFilterToUse.value = [];
   languagesToFilterToUse.value = [];
   updateFilters();
+  Loading.hide();
 };
 
 const deleteSnippet = async (id) => {
+  Loading.show();
   await deleteSnippetFirebase(userId.value, id);
   jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
   console.log('json: ', jsonData.value);
   snippetsToShow.value = jsonData.value;
   removeSnippetFrontend(id);
   updateFilters();
+  Loading.hide();
 };
 
 const removeSnippetFrontend = (id) => {

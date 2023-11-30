@@ -68,6 +68,7 @@
       <div class="user-card" v-if="showMenu">
         <div class="user-info">
           <div class="user-details">
+            <q-avatar icon="person" size="75px"></q-avatar>
             <p class="user-name">{{ userName }}</p>
             <p class="user-email">{{ userEmail }}</p>
           </div>
@@ -279,5 +280,12 @@ const handleClickOutside = (event) => {
 .slide-leave-from {
   opacity: 1;
   transform: translateY(0);
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
