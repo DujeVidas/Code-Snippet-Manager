@@ -84,6 +84,9 @@ onMounted(async () => {
       userId.value = user.uid;
       userEmail.value = user.email;
       userName.value = user.displayName;
+      console.log(userId.value);
+      console.log(userEmail.value);
+      console.log(userName.value);
       isComponentReady.value = true;
 
       Loading.show();

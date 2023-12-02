@@ -18,10 +18,12 @@ const register = (data) => {
         .then((userCredential) => {
           updateProfile(userCredential.user, {
             displayName: data.first_name + ' ' + data.last_name,
+          }).then(() => {
+            // This block will execute after the profile update is completed
+            console.log(userCredential.user.displayName);
+            Loading.hide();
+            resolve(userCredential.user);
           });
-
-          Loading.hide();
-          resolve(userCredential.user);
         })
         .catch((err) => {
           err = parseErrorMessage(err);
