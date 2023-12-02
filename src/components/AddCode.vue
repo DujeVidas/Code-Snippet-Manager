@@ -2,7 +2,7 @@
   <q-dialog
     @before-hide="resetForm"
     transition-show="slide-down"
-    transition-hide="slide-up"
+    transition-hide="slide-down"
     transition-duration="500"
   >
     <div class="q-pa-md">
@@ -120,7 +120,6 @@ function resetForm() {
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'RubixSmall';
 }
 
 .q-card-section {

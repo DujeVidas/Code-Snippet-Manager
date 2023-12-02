@@ -26,10 +26,6 @@
 }
 
 .bg-auth {
-  background: linear-gradient(
-    315deg,
-    rgba(0, 0, 0, 1) 45%,
-    rgb(70, 1, 107) 100%
-  );
+  background: linear-gradient(45deg, #333333, #000000);
 }
 </style>

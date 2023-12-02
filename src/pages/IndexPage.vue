@@ -90,8 +90,6 @@ onMounted(async () => {
       jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
       Loading.hide();
 
-      console.log(typeof jsonData.value);
-      console.log(jsonData.value);
       snippetsToShow.value = jsonData.value;
       tags.value = getTags(jsonData.value);
       languages.value = getLanguages(jsonData.value);
@@ -140,7 +138,6 @@ const getLanguages = (snippets) => {
 };
 
 const updateFilters = () => {
-  console.log(jsonData.value);
   tags.value = getTags(jsonData.value);
   languages.value = getLanguages(jsonData.value);
 };
@@ -167,7 +164,6 @@ const deleteAllSnippets = async () => {
   Loading.show();
   await deleteAllSnippetsFirebase(userId.value);
   jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
-  console.log(jsonData.value);
   snippetsToShow.value = jsonData.value;
   snippetsTagsFiltered.value = [];
   tagsToFilterToUse.value = [];
@@ -180,7 +176,6 @@ const deleteSnippet = async (id) => {
   Loading.show();
   await deleteSnippetFirebase(userId.value, id);
   jsonData.value = (await getSnippetsFirebase(userId.value)) || [];
-  console.log('json: ', jsonData.value);
   snippetsToShow.value = jsonData.value;
   removeSnippetFrontend(id);
   updateFilters();
@@ -210,7 +205,7 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* This may need to be adjusted based on your layout needs */
+  overflow: hidden;
 }
 body {
   background-color: #1d1d1d;

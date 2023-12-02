@@ -63,8 +63,7 @@ const submit = async () => {
 .my_card {
   width: 25rem;
   border-radius: 8px;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  box-shadow: 0px 0px 15px rgba(246, 246, 246, 1);
   font-family: 'Rubix';
 }
 </style>

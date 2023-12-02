@@ -2,7 +2,7 @@
   <div class="action" @click="handleClickOutside">
     <q-toolbar class="toolbar">
       <q-avatar
-        color="dark"
+        style="background-color: #333"
         text-color="white"
         class="avatar"
         :class="{ active: showMenu }"
@@ -79,7 +79,7 @@
             color="white"
             style="background-color: black"
             @click="alertLogout = true"
-            class="full-width"
+            class="full-width logout-btn"
             >Logout</q-btn
           >
         </div>
@@ -200,27 +200,46 @@ const handleClickOutside = (event) => {
   left: 10px;
   top: 60px;
   width: 200px;
-  background-color: #1d1d1d;
-  color: white;
+  background-color: #333;
+  color: #fff;
   box-shadow: 0px 0px 5px 1px rgba(255, 255, 255, 0.201);
   border-radius: 10px;
   z-index: 10;
+  padding: 20px;
 }
 
 .user-name {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
 .user-email {
-  color: gray;
+  font-size: 14px;
+  opacity: 0.8;
 }
 
 .user-info {
   cursor: default;
-  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.logout-btn {
+  width: 100%;
+  margin-top: 15px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+.logout-btn:hover {
+  background-color: #b71c1c;
+}
 .toolbar {
   background-color: #212121;
   color: rgb(255, 255, 255);
@@ -243,7 +262,7 @@ const handleClickOutside = (event) => {
 }
 
 .action .user-card::before {
-  background-color: #1d1d1d;
+  background-color: #333;
   content: '';
   height: 20px;
   position: absolute;
@@ -251,11 +270,11 @@ const handleClickOutside = (event) => {
   transform: rotate(45deg);
   top: -10px;
   width: 20px;
-  box-shadow: -1px -1px 0px 0px rgba(255, 255, 255, 0.201);
+  box-shadow: -1px -1px 0px 0px rgba(255, 255, 255, 0.001);
 }
 
 .action .user-card::after {
-  background-color: #1d1d1d;
+  background-color: #333;
   content: '';
   height: 8px;
   position: absolute;
